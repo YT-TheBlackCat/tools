@@ -1,12 +1,18 @@
 # Quick install method
+# Color codes
+RED="\033[0;31m"
+GREEN="\033[0;32m"
+GREY="\033[0;90m"
+RESET="\033[0m"
+
 command() {
-    local description="$1"
+    local info="$1"
     shift
-    echo "==> $description..."
-    if "$@"; then
-        echo "✅ $description: SUCCESS"
+    printf "${GREY}%s...${RESET}\n" "$info"
+    if "$@" > /dev/null 2>&1; then
+        printf "${GREEN}%s: SUCCESS${RESET}\n" "$info"
     else
-        echo "❌ $description: FAILED" >&2
+        printf "${RED}%s: FAILED${RESET}\n" "$info" >&2
         exit 1
     fi
 }
